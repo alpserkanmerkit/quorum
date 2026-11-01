@@ -1,0 +1,1719 @@
+/* ============================================
+   QUORUM — Decision desk
+   Global stylesheet — "Desk" design system
+   Spec: docs/design/quorum-desk.md (I08 structure on I05 navy)
+   Depth = surface tone + 1px borders. No shadows, gradients, glows or pulses.
+   ============================================ */
+
+/* Fonts are self-hosted via @fontsource imports in index.tsx (no external request). */
+
+/* ============================================
+   DESIGN TOKENS — dark navy (default)
+   ============================================ */
+
+:root {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --q-bg-base: #0B1420;
+  --q-bg-surface: #101B2A;
+  --q-bg-elevated: #152235;
+  --q-bg-hover: #1A2A40;
+  --q-border: #223349;
+  --q-border-bright: #34496A;
+
+  /* Accent (one) */
+  --q-accent: #5AA9E6;
+  --q-accent-dim: rgba(90, 169, 230, 0.14);
+  --q-accent-glow: rgba(90, 169, 230, 0.28);
+
+  /* Pending / highlight (kept name; same hue as pending) */
+  --q-gold: #E0B04F;
+  --q-gold-dim: rgba(224, 176, 79, 0.14);
+
+  /* Semantic */
+  --q-bull: #46B98A;
+  --q-bull-dim: rgba(70, 185, 138, 0.14);
+  --q-bear: #F58C86;
+  --q-bear-dim: rgba(245, 140, 134, 0.14);
+  --q-warn: #E0B04F;
+  --q-warn-dim: rgba(224, 176, 79, 0.14);
+  --q-purple: #93A3B8;
+  --q-purple-dim: rgba(147, 163, 184, 0.14);
+
+  /* Text */
+  --q-text-primary: #F2F6FA;
+  --q-text-secondary: #C9D5E3;
+  --q-text-muted: #93A3B8;
+  --q-text-heading: #FFFFFF;
+  --q-on-ink: #0B1420;
+
+  /* Type (no serif in this system; the serif token name is kept and points to the sans) */
+  --q-font-serif: 'Source Sans 3', system-ui, sans-serif;
+  --q-font-sans: 'Source Sans 3', system-ui, sans-serif;
+  --q-font-mono: 'Source Code Pro', ui-monospace, monospace;
+
+  /* Layout */
+  --q-content-max: 1280px;
+  --q-gutter: 32px;
+  --q-radius: 0;
+
+  /* Motion (160–220ms, opacity/transform only) */
+  --q-transition: 160ms ease;
+  --q-transition-slow: 200ms ease;
+}
+
+/* ============================================
+   DESIGN TOKENS — light (print / reports only)
+   ============================================ */
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --q-bg-base: #FFFFFF;
+  --q-bg-surface: #F5F6F8;
+  --q-bg-elevated: #FFFFFF;
+  --q-bg-hover: #EEF1F5;
+  --q-border: #DDE2E9;
+  --q-border-bright: #B8C2D0;
+
+  --q-accent: #0F2747;
+  --q-accent-dim: rgba(15, 39, 71, 0.08);
+  --q-accent-glow: rgba(15, 39, 71, 0.18);
+
+  --q-gold: #8A5A00;
+  --q-gold-dim: rgba(138, 90, 0, 0.10);
+
+  --q-bull: #1E6B3C;
+  --q-bull-dim: rgba(30, 107, 60, 0.10);
+  --q-bear: #A3302A;
+  --q-bear-dim: rgba(163, 48, 42, 0.10);
+  --q-warn: #8A5A00;
+  --q-warn-dim: rgba(138, 90, 0, 0.10);
+  --q-purple: #5E6776;
+  --q-purple-dim: rgba(94, 103, 118, 0.10);
+
+  --q-text-primary: #1A2233;
+  --q-text-secondary: #4F5868;
+  --q-text-muted: #5E6776;
+  --q-text-heading: #0F2747;
+  --q-on-ink: #FFFFFF;
+}
+
+@media print {
+  :root {
+    color-scheme: light;
+
+    --q-bg-base: #FFFFFF;
+    --q-bg-surface: #F5F6F8;
+    --q-bg-elevated: #FFFFFF;
+    --q-bg-hover: #EEF1F5;
+    --q-border: #DDE2E9;
+    --q-border-bright: #B8C2D0;
+
+    --q-accent: #0F2747;
+    --q-accent-dim: rgba(15, 39, 71, 0.08);
+    --q-accent-glow: rgba(15, 39, 71, 0.18);
+
+    --q-gold: #8A5A00;
+    --q-gold-dim: rgba(138, 90, 0, 0.10);
+
+    --q-bull: #1E6B3C;
+    --q-bull-dim: rgba(30, 107, 60, 0.10);
+    --q-bear: #A3302A;
+    --q-bear-dim: rgba(163, 48, 42, 0.10);
+    --q-warn: #8A5A00;
+    --q-warn-dim: rgba(138, 90, 0, 0.10);
+    --q-purple: #5E6776;
+    --q-purple-dim: rgba(94, 103, 118, 0.10);
+
+    --q-text-primary: #1A2233;
+    --q-text-secondary: #4F5868;
+    --q-text-muted: #5E6776;
+    --q-text-heading: #0F2747;
+    --q-on-ink: #FFFFFF;
+  }
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font-family: var(--q-font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  font-variant-numeric: lining-nums;
+  background: var(--q-bg-base);
+  color: var(--q-text-primary);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  scrollbar-color: var(--q-border-bright) transparent;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--q-font-sans);
+  font-weight: 600;
+  color: var(--q-text-heading);
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--q-accent);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--q-accent-glow);
+  color: var(--q-text-heading);
+}
+
+/* ============================================
+   LAYOUT SHELL — top bar, page area, status line (desk v2: no side menu)
+   ============================================ */
+
+.q-shell {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--q-bg-base);
+}
+
+.q-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Own transition group: only the page area animates on route change, the bars stay put. */
+  view-transition-name: q-main;
+}
+
+/* Route loading placeholder (App.tsx) */
+.q-route-fallback {
+  flex: 1;
+  padding: 24px;
+  background: var(--q-bg-base);
+}
+
+.q-route-fallback__card {
+  padding: 16px;
+  font-size: 13px;
+  color: var(--q-text-muted);
+}
+
+.q-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ============================================
+   TOP BAR — brand, module tabs, selectors (64px)
+   ============================================ */
+
+.q-topbar {
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--q-border);
+  background: var(--q-bg-base);
+  position: relative;
+  z-index: 100;
+}
+
+.q-topbar__inner {
+  max-width: var(--q-content-max);
+  margin: 0 auto;
+  padding: 0 var(--q-gutter);
+  min-height: 64px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 32px;
+}
+
+.q-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.q-brand__name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--q-text-heading);
+  letter-spacing: -0.01em;
+}
+
+.q-brand__tagline {
+  font-size: 13px;
+  color: var(--q-text-muted);
+}
+
+.q-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  flex: 1 1 auto;
+}
+
+.q-tab {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 14px;
+  font-size: 15px;
+  color: var(--q-text-secondary);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color var(--q-transition), border-color var(--q-transition);
+}
+
+.q-tab:hover {
+  color: var(--q-text-heading);
+}
+
+.q-tab--active {
+  color: var(--q-text-heading);
+  font-weight: 600;
+  border-bottom-color: var(--q-accent);
+}
+
+.q-topbar__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.q-topbar__field .q-portfolio-select {
+  width: auto;
+  max-width: 220px;
+}
+
+.q-team-menu {
+  position: relative;
+}
+
+.q-team-menu__count {
+  font-variant-numeric: tabular-nums;
+  color: var(--q-text-muted);
+}
+
+.q-team-menu .q-team-admin {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  width: 320px;
+  padding: 16px;
+  background: var(--q-bg-surface);
+  border: 1px solid var(--q-border-bright);
+}
+
+.q-portfolio-select {
+  width: 100%;
+  min-height: 32px;
+  background: var(--q-bg-base);
+  border: 1px solid var(--q-border-bright);
+  border-radius: var(--q-radius);
+  color: var(--q-text-primary);
+  padding: 4px 8px;
+  font-size: 13px;
+  font-family: var(--q-font-sans);
+  cursor: pointer;
+  transition: border-color var(--q-transition);
+}
+
+.q-portfolio-select:focus-visible {
+  border-color: var(--q-accent);
+}
+
+.q-portfolio-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Team governance (sidebar, ADMIN only) */
+.q-team-admin {
+  display: grid;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.q-team-form {
+  display: grid;
+  gap: 6px;
+}
+
+.q-team-message {
+  font-size: 12px;
+  color: var(--q-text-muted);
+}
+
+.q-team-message--error {
+  color: var(--q-bear);
+}
+
+.q-team-list {
+  display: grid;
+  gap: 0;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.q-team-loading {
+  font-size: 12px;
+  color: var(--q-text-muted);
+}
+
+.q-team-row {
+  display: grid;
+  gap: 4px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--q-border);
+}
+
+.q-team-row:last-child {
+  border-bottom: none;
+}
+
+.q-team-email {
+  font-size: 13px;
+  color: var(--q-text-heading);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.q-team-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.q-team-actions .q-portfolio-select {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+}
+
+/* Form input */
+.q-input {
+  width: 100%;
+  min-height: 32px;
+  background: var(--q-bg-base);
+  border: 1px solid var(--q-border-bright);
+  border-radius: var(--q-radius);
+  color: var(--q-text-primary);
+  padding: 6px 10px;
+  font-size: 14px;
+  font-family: var(--q-font-sans);
+  transition: border-color var(--q-transition);
+}
+
+.q-input--sm {
+  font-size: 13px;
+  padding: 4px 8px;
+}
+
+.q-input::placeholder {
+  color: var(--q-text-muted);
+}
+
+.q-input:focus-visible {
+  border-color: var(--q-accent);
+}
+
+.q-input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   STATUS LINE — feed state, runtime, service badges
+   ============================================ */
+
+.q-statusbar {
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 20px;
+  padding: 6px var(--q-gutter);
+  border-top: 1px solid var(--q-border);
+  background: var(--q-bg-surface);
+  font-size: 12px;
+  color: var(--q-text-muted);
+}
+
+.q-statusbar__feed {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--q-text-primary);
+  font-weight: 600;
+}
+
+.q-statusbar__user {
+  margin-left: auto;
+}
+
+.q-status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.q-status-indicator--live {
+  background: var(--q-bull);
+}
+
+.q-status-indicator--paused {
+  background: transparent;
+  border: 1px solid var(--q-text-muted);
+}
+
+.q-status-runtime {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.q-status-badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.q-status-badges .q-badge {
+  font-size: 11px;
+}
+
+/* ============================================
+   PAGE HEADER — toolbar on the base tone
+   ============================================ */
+
+/* Desk v2: the header row sits on the same 1280px column as the page content. */
+.q-page-header {
+  padding: 28px max(var(--q-gutter), calc((100% - var(--q-content-max)) / 2 + var(--q-gutter))) 16px;
+  background: var(--q-bg-base);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.q-page-title {
+  font-family: var(--q-font-sans);
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--q-text-heading);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.q-page-sub {
+  font-size: 14px;
+  color: var(--q-text-muted);
+  margin-top: 4px;
+}
+
+.q-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.q-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 6px 14px;
+  border-radius: var(--q-radius);
+  font-family: var(--q-font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--q-text-primary);
+  transition: background-color var(--q-transition), color var(--q-transition), border-color var(--q-transition);
+  white-space: nowrap;
+}
+
+.q-btn:focus-visible {
+  outline: 2px solid var(--q-accent);
+  outline-offset: 2px;
+}
+
+/* Primary = the one accent fill */
+.q-btn--primary,
+.q-btn--accent {
+  min-height: 40px;
+  background: var(--q-accent);
+  color: var(--q-on-ink);
+  border-color: var(--q-accent);
+}
+
+.q-btn--primary:hover:not(:disabled),
+.q-btn--accent:hover:not(:disabled) {
+  background: var(--q-text-heading);
+  border-color: var(--q-text-heading);
+}
+
+/* Secondary = 1px outline */
+.q-btn--ghost {
+  background: transparent;
+  color: var(--q-text-primary);
+  border-color: var(--q-border-bright);
+}
+
+.q-btn--ghost:hover:not(:disabled) {
+  background: var(--q-bg-hover);
+  color: var(--q-text-heading);
+}
+
+.q-btn--live {
+  background: var(--q-bull-dim);
+  color: var(--q-bull);
+  border-color: var(--q-bull);
+}
+
+.q-btn--paused {
+  background: var(--q-bear-dim);
+  color: var(--q-bear);
+  border-color: var(--q-bear);
+}
+
+.q-btn--warning {
+  background: var(--q-warn-dim);
+  color: var(--q-warn);
+  border-color: var(--q-warn);
+}
+
+.q-btn--live:hover:not(:disabled),
+.q-btn--paused:hover:not(:disabled),
+.q-btn--warning:hover:not(:disabled) {
+  opacity: 0.86;
+}
+
+.q-btn--sm {
+  min-height: 28px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.q-btn--icon {
+  padding: 4px 8px;
+}
+
+.q-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   CRITICAL TICKER — static wire strip
+   ============================================ */
+
+.q-critical-ticker {
+  background: var(--q-bear-dim);
+  border-bottom: 1px solid var(--q-bear);
+  padding: 6px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.q-ticker-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--q-bear);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.q-ticker-items {
+  display: flex;
+  gap: 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.q-ticker-item {
+  font-size: 13px;
+  color: var(--q-text-primary);
+  padding: 0 16px;
+}
+
+.q-ticker-item:first-child {
+  padding-left: 0;
+}
+
+.q-ticker-item + .q-ticker-item {
+  border-left: 1px solid var(--q-border);
+}
+
+.q-ticker-score {
+  font-family: var(--q-font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--q-bear);
+  font-weight: 600;
+}
+
+/* ============================================
+   MAIN SCROLLABLE AREA
+   ============================================ */
+
+.q-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.q-scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.q-scroll-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.q-scroll-area::-webkit-scrollbar-thumb {
+  background: var(--q-border-bright);
+  border-radius: 0;
+}
+
+.q-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: var(--q-text-muted);
+}
+
+.q-content-max {
+  max-width: var(--q-content-max);
+  margin: 0 auto;
+  padding: 0 var(--q-gutter) 56px;
+}
+
+/* ============================================
+   CARDS — surface tone + 1px border
+   ============================================ */
+
+.q-card {
+  background: var(--q-bg-surface);
+  border: 1px solid var(--q-border);
+  border-radius: var(--q-radius);
+  overflow: hidden;
+}
+
+/* Semantic cards: whole 1px border in the status colour (status is also written in text). */
+.q-card--bull {
+  border-color: var(--q-bull);
+}
+
+.q-card--bear {
+  border-color: var(--q-bear);
+}
+
+.q-card--warn {
+  border-color: var(--q-warn);
+}
+
+.q-card--critical {
+  border-color: var(--q-bear);
+}
+
+.q-card-header {
+  padding: 14px 16px 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.q-card-body {
+  padding: 0 16px 14px;
+}
+
+.q-card-footer {
+  padding: 10px 16px;
+  border-top: 1px solid var(--q-border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   STAT TILES — summary strip
+   ============================================ */
+
+.q-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0;
+  padding: 16px 24px;
+}
+
+.q-stat-tile {
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--q-border);
+  border-radius: 0;
+  padding: 10px 16px 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.q-stat-tile + .q-stat-tile {
+  padding-left: 16px;
+  border-left: 1px solid var(--q-border);
+}
+
+.q-stat-label {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--q-text-muted);
+}
+
+.q-stat-value {
+  font-family: var(--q-font-sans);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--q-text-heading);
+  line-height: 1.2;
+}
+
+.q-stat-value--neutral {
+  color: var(--q-text-heading);
+}
+
+.q-stat-value--bull {
+  color: var(--q-bull);
+}
+
+.q-stat-value--bear {
+  color: var(--q-bear);
+}
+
+.q-stat-value--warn {
+  color: var(--q-warn);
+}
+
+.q-stat-value--gold {
+  color: var(--q-gold);
+}
+
+.q-stat-change {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.q-stat-change--pos {
+  color: var(--q-bull);
+}
+
+.q-stat-change--neg {
+  color: var(--q-bear);
+}
+
+/* ============================================
+   BADGES & TAGS
+   ============================================ */
+
+.q-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 6px;
+  border-radius: 2px;
+  font-family: var(--q-font-sans);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.q-badge--bull {
+  background: var(--q-bull-dim);
+  color: var(--q-bull);
+  border-color: var(--q-bull);
+}
+
+.q-badge--bear {
+  background: var(--q-bear-dim);
+  color: var(--q-bear);
+  border-color: var(--q-bear);
+}
+
+.q-badge--warn {
+  background: var(--q-warn-dim);
+  color: var(--q-warn);
+  border-color: var(--q-warn);
+}
+
+.q-badge--neutral {
+  background: transparent;
+  color: var(--q-text-secondary);
+  border-color: var(--q-border-bright);
+}
+
+.q-badge--accent {
+  background: var(--q-accent-dim);
+  color: var(--q-accent);
+  border-color: var(--q-accent);
+}
+
+.q-badge--purple {
+  background: var(--q-purple-dim);
+  color: var(--q-purple);
+  border-color: var(--q-purple);
+}
+
+.q-badge--gold {
+  background: var(--q-gold-dim);
+  color: var(--q-gold);
+  border-color: var(--q-gold);
+}
+
+/* ============================================
+   TABLE — 13px, 32px rows, tabular numerals, numbers right
+   ============================================ */
+
+.q-table-wrap {
+  overflow-x: auto;
+  border-radius: 0;
+  border: none;
+  border-top: 1px solid var(--q-border);
+  border-bottom: 1px solid var(--q-border);
+}
+
+.q-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.q-table th {
+  height: 32px;
+  padding: 0 12px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--q-text-muted);
+  background: var(--q-bg-elevated);
+  border-bottom: 1px solid var(--q-border);
+  white-space: nowrap;
+}
+
+.q-table td {
+  height: 32px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--q-border);
+  color: var(--q-text-primary);
+}
+
+.q-table tr:last-child td {
+  border-bottom: none;
+}
+
+.q-table tr {
+  transition: background-color var(--q-transition);
+}
+
+.q-table tbody tr:hover td {
+  background: var(--q-bg-hover);
+}
+
+/* Numbers: right-aligned, mono, tabular. */
+.q-table th.num,
+.q-table td.num,
+.q-table td.mono {
+  text-align: right;
+}
+
+.q-table td.mono,
+.q-table td.num {
+  font-family: var(--q-font-mono);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.q-table td.bull {
+  color: var(--q-bull);
+}
+
+.q-table td.bear {
+  color: var(--q-bear);
+}
+
+.q-table td.warn {
+  color: var(--q-warn);
+}
+
+/* ============================================
+   AGENT / BOARDROOM — decision-record cards
+   ============================================ */
+
+.q-war-room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  padding: 20px 24px;
+}
+
+.q-agent-card {
+  background: var(--q-bg-surface);
+  border: 1px solid var(--q-border);
+  border-radius: var(--q-radius);
+  padding: 16px;
+  overflow: hidden;
+}
+
+/* "Working" state: dashed border instead of a pulse. */
+.q-agent-card--thinking {
+  border-style: dashed;
+  border-color: var(--q-text-muted);
+}
+
+.q-agent-card--done {
+  border-color: var(--q-border-bright);
+}
+
+.q-agent-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.q-agent-icon {
+  font-size: 18px;
+  line-height: 1;
+  color: var(--q-text-secondary);
+}
+
+.q-agent-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--q-text-heading);
+}
+
+.q-agent-spec {
+  font-size: 12px;
+  color: var(--q-text-muted);
+  margin-top: 2px;
+}
+
+.q-consensus-bar {
+  height: 6px;
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  background: var(--q-bg-hover);
+}
+
+.q-consensus-bull {
+  background: var(--q-bull);
+}
+
+.q-consensus-bear {
+  background: var(--q-bear);
+}
+
+.q-consensus-neutral {
+  background: var(--q-text-muted);
+}
+
+/* ============================================
+   PORTFOLIO / RISK
+   ============================================ */
+
+.q-portfolio-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.q-portfolio-main {
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.q-portfolio-side {
+  border-left: 1px solid var(--q-border);
+  overflow-y: auto;
+  padding: 20px;
+  background: var(--q-bg-surface);
+}
+
+.q-section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--q-text-heading);
+  margin-bottom: 12px;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.q-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: var(--q-text-muted);
+  gap: 12px;
+  text-align: center;
+}
+
+.q-empty-icon {
+  font-size: 28px;
+  color: var(--q-text-muted);
+}
+
+.q-empty-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--q-text-heading);
+}
+
+.q-empty-sub {
+  font-size: 14px;
+  color: var(--q-text-secondary);
+}
+
+/* ============================================
+   LOADING SKELETON — flat tone, no shimmer
+   ============================================ */
+
+.q-skeleton {
+  background: var(--q-bg-hover);
+  border-radius: 2px;
+}
+
+/* ============================================
+   IMPACT BANNER (on NewsCard)
+   ============================================ */
+
+.q-impact-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  margin: 0 16px 10px;
+  border-radius: var(--q-radius);
+  font-size: 13px;
+  border: 1px solid transparent;
+}
+
+.q-impact-banner--high {
+  background: var(--q-bear-dim);
+  border-color: var(--q-bear);
+  color: var(--q-bear);
+}
+
+.q-impact-banner--medium {
+  background: var(--q-warn-dim);
+  border-color: var(--q-warn);
+  color: var(--q-warn);
+}
+
+.q-impact-banner--low {
+  background: var(--q-bull-dim);
+  border-color: var(--q-bull);
+  color: var(--q-bull);
+}
+
+/* ============================================
+   NOTIFICATION CENTER
+   ============================================ */
+
+.q-notif-bell {
+  position: relative;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--q-radius);
+  color: var(--q-text-secondary);
+  transition: background-color var(--q-transition), color var(--q-transition);
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.q-notif-bell:hover {
+  background: var(--q-bg-hover);
+  color: var(--q-text-heading);
+}
+
+.q-notif-count {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  background: var(--q-bear);
+  border-radius: 2px;
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--q-on-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================
+   DIVIDER
+   ============================================ */
+
+.q-divider {
+  height: 1px;
+  background: var(--q-border);
+  margin: 16px 0;
+}
+
+/* ============================================
+   MONO TEXT
+   ============================================ */
+
+.mono {
+  font-family: var(--q-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   PANEL ENTRY (160-200 ms, opacity/transform only)
+   ============================================ */
+
+.q-fade-in {
+  animation: fade-in 160ms ease both;
+}
+
+.q-slide-up {
+  animation: slide-up 200ms ease both;
+}
+
+/* ============================================
+   ROUTE TRANSITIONS — View Transitions API (App.tsx)
+   Only the page area (.q-main) animates: old page fades out, new page fades in and settles
+   4px. Unsupported browsers navigate without animation.
+   ============================================ */
+
+::view-transition-group(root),
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-group(q-main) {
+  animation: none;
+}
+
+::view-transition-old(q-main) {
+  animation: q-route-out 160ms ease both;
+}
+
+::view-transition-new(q-main) {
+  animation: q-route-in 200ms ease both;
+}
+
+@keyframes q-route-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes q-route-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   KEYFRAMES
+   ============================================ */
+
+/* Retired: names kept because inline styles and page sheets may still reference them; they do not move. */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes thinking-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* ============================================
+   UTILITY COMPAT (legacy class names still used by shared components)
+   ============================================ */
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.bg-black {
+  background: var(--q-bg-base);
+}
+
+.text-gray-200 {
+  color: var(--q-text-primary);
+}
+
+.font-sans {
+  font-family: var(--q-font-sans);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
+.gap-3 {
+  gap: 12px;
+}
+
+.p-4 {
+  padding: 16px;
+}
+
+.p-6 {
+  padding: 24px;
+}
+
+.py-2 {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.px-3 {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.mt-1 {
+  margin-top: 4px;
+}
+
+.mb-4 {
+  margin-bottom: 16px;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.sticky {
+  position: sticky;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.z-20 {
+  z-index: 20;
+}
+
+.border-b {
+  border-bottom: 1px solid var(--q-border);
+}
+
+.border-t {
+  border-top: 1px solid var(--q-border);
+}
+
+.rounded {
+  border-radius: var(--q-radius);
+}
+
+.rounded-lg {
+  border-radius: var(--q-radius);
+}
+
+.text-sm {
+  font-size: 14px;
+}
+
+.text-xs {
+  font-size: 12px;
+}
+
+.text-xl {
+  font-size: 18px;
+}
+
+.text-2xl {
+  font-size: 22px;
+}
+
+.font-bold {
+  font-weight: 600;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-mono {
+  font-family: var(--q-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.text-white {
+  color: var(--q-text-heading);
+}
+
+.text-gray-300 {
+  color: var(--q-text-primary);
+}
+
+.text-gray-400 {
+  color: var(--q-text-secondary);
+}
+
+.text-gray-500 {
+  color: var(--q-text-muted);
+}
+
+.text-gray-600 {
+  color: var(--q-text-muted);
+}
+
+.text-blue-400 {
+  color: var(--q-accent);
+}
+
+.text-blue-500 {
+  color: var(--q-accent);
+}
+
+.text-green-500 {
+  color: var(--q-bull);
+}
+
+.text-red-400 {
+  color: var(--q-bear);
+}
+
+.text-red-500 {
+  color: var(--q-bear);
+}
+
+.text-yellow-500 {
+  color: var(--q-gold);
+}
+
+.bg-gray-900 {
+  background: var(--q-bg-surface);
+}
+
+.bg-gray-950\/50 {
+  background: var(--q-bg-surface);
+}
+
+.bg-gray-800 {
+  background: var(--q-bg-elevated);
+}
+
+.bg-green-900\/10 {
+  background: var(--q-bull-dim);
+}
+
+.bg-red-900\/10 {
+  background: var(--q-bear-dim);
+}
+
+.border {
+  border: 1px solid var(--q-border);
+}
+
+.border-gray-700 {
+  border-color: var(--q-border-bright);
+}
+
+.border-gray-800 {
+  border-color: var(--q-border);
+}
+
+.border-blue-900 {
+  border-color: var(--q-accent);
+}
+
+.border-green-900 {
+  border-color: var(--q-bull);
+}
+
+.border-red-900 {
+  border-color: var(--q-bear);
+}
+
+.border-red-900\/30 {
+  border-color: var(--q-bear);
+}
+
+.bg-red-900\/20 {
+  background: var(--q-bear-dim);
+}
+
+.transition-colors {
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+.transition-all {
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.duration-200 {
+  transition-duration: 160ms;
+}
+
+/* Retired: no blur, pulses or marquee in the desk system. */
+.backdrop-blur {
+  backdrop-filter: none;
+}
+
+.animate-pulse {
+  animation: none;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-marquee {
+  animation: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.space-y-2>*+* {
+  margin-top: 8px;
+}
+
+.max-w-5xl {
+  max-width: 1024px;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.h-20 {
+  height: 80px;
+}
+
+.h-64 {
+  height: 256px;
+}
+
+.relative {
+  position: relative;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.hidden {
+  display: none;
+}
+
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+.disabled\:opacity-50:disabled {
+  opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
+
+  .md\:ml-64 {
+    margin-left: 240px;
+  }
+}

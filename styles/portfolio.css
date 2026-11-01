@@ -1,0 +1,582 @@
+/* Portfolio & Risk -- Quorum "Desk" layout (spec: docs/design/quorum-desk.md).
+   Scoped under .pf so it composes with the global q-* classes in index.css.
+   Colours come from --q-* tokens only. Depth = surface tone + 1px borders: no shadows, gradients or glows. */
+
+.pf {
+  --pf-sans: var(--q-font-sans, 'Source Sans 3', system-ui, sans-serif);
+  --pf-mono: var(--q-font-mono, 'Source Code Pro', ui-monospace, monospace);
+  --pf-on-ink: var(--q-on-ink, var(--q-bg-base));
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--pf-sans);
+  font-size: 14px;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--q-text-primary);
+}
+
+/* ---------- numbers ---------- */
+.pf .pf-num,
+.pf .q-stat-value,
+.pf .q-stat-change,
+.pf .q-badge {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.pf .pf-up { color: var(--q-bull); }
+.pf .pf-down { color: var(--q-bear); }
+.pf .pf-warn { color: var(--q-warn); }
+.pf .pf-muted { color: var(--q-text-muted); }
+.pf .pf-mark {
+  font-size: 0.8em;
+  margin-right: 0.35em;
+  display: inline-block;
+}
+.pf .pf-mark--after { margin: 0 0 0 0.35em; }
+
+/* ---------- page header ---------- */
+.pf .q-page-header {
+  background: var(--q-bg-base);
+  backdrop-filter: none;
+}
+.pf .pf-title {
+  font-family: var(--pf-sans);
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--q-text-heading);
+  margin: 0;
+}
+.pf .q-page-sub {
+  font-family: var(--pf-sans);
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--q-text-secondary);
+  margin-top: 4px;
+}
+.pf .q-btn {
+  border-radius: var(--q-radius);
+  font-family: var(--pf-sans);
+  font-size: 13px;
+  letter-spacing: 0;
+  min-height: 32px;
+}
+.pf .q-btn--ghost {
+  color: var(--q-text-heading);
+  border-color: var(--q-border-bright);
+  background: transparent;
+}
+.pf .q-btn--ghost:hover:not(:disabled) { background: var(--q-bg-hover); }
+.pf .pf-spin { animation: pf-spin 1s linear infinite; }
+@keyframes pf-spin { to { transform: rotate(360deg); } }
+
+/* ---------- layout ---------- */
+/* Desk v2 (design A): one 1280px column; price tape with positions beside it, then risk, then trading. */
+.pf .pf-wrap {
+  max-width: var(--q-content-max);
+  margin: 0 auto;
+  padding: 16px var(--q-gutter) 0;
+}
+.pf .pf-block { padding: 0 0 32px; }
+.pf .pf-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 32px;
+}
+.pf .pf-row__main { flex: 999 1 560px; min-width: 0; }
+.pf .pf-row__aside { flex: 1 1 520px; min-width: 0; }
+.pf .pf-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 32px;
+  padding: 0 0 24px;
+}
+.pf .pf-risk-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.65fr);
+  gap: 24px;
+  margin-top: 20px;
+}
+.pf .pf-spacer { height: 32px; }
+
+/* ---------- headings (sans 600, sentence case) ---------- */
+.pf .pf-label,
+.pf .q-section-title {
+  font-family: var(--pf-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--q-text-secondary);
+  margin: 0 0 2px;
+}
+.pf .pf-h3,
+.pf .pf-h4 {
+  font-family: var(--pf-sans);
+  font-weight: 600;
+  color: var(--q-text-heading);
+  margin: 0;
+  line-height: 1.25;
+}
+.pf .pf-h3 { font-size: 21px; }
+.pf .pf-h4 { font-size: 16px; margin-bottom: 10px; }
+.pf .pf-deck {
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--q-text-secondary);
+}
+
+/* ---------- stat strip: portfolio summary ---------- */
+.pf .pf-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 0 0 32px;
+  padding: 0;
+  background: var(--q-bg-surface);
+  border: 1px solid var(--q-border);
+  border-radius: var(--q-radius);
+}
+.pf .pf-stats .q-stat-tile,
+.pf .pf-report-stats .q-stat-tile {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 16px 20px;
+  gap: 6px;
+}
+.pf .pf-stats .q-stat-tile + .q-stat-tile,
+.pf .pf-report-stats .q-stat-tile + .q-stat-tile {
+  border-left: 1px solid var(--q-border);
+}
+.pf .q-stat-label {
+  font-family: var(--pf-sans);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--q-text-secondary);
+}
+.pf .q-stat-value {
+  font-family: var(--pf-sans);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--q-text-heading);
+}
+.pf .q-stat-value--bull { color: var(--q-bull); }
+.pf .q-stat-value--bear { color: var(--q-bear); }
+.pf .q-stat-value--warn { color: var(--q-warn); }
+.pf .q-stat-value--gold { color: var(--q-text-heading); }
+.pf .q-stat-value--neutral { color: var(--q-text-heading); }
+.pf .q-stat-change {
+  font-family: var(--pf-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--q-text-secondary);
+}
+.pf .q-stat-change--pos { color: var(--q-bull); }
+.pf .q-stat-change--neg { color: var(--q-bear); }
+.pf .pf-hint-line {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--q-text-muted);
+}
+
+/* ---------- report panels ---------- */
+.pf .pf-report {
+  background: var(--q-bg-surface);
+  border: 1px solid var(--q-border);
+  border-radius: var(--q-radius);
+  box-shadow: none;
+  padding: 20px 24px 24px;
+}
+.pf .pf-report:hover { background: var(--q-bg-surface); border-color: var(--q-border); }
+.pf .pf-report-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--q-border);
+}
+.pf .pf-report-head--quote { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+.pf .pf-report-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  background: var(--q-bg-base);
+  border: 1px solid var(--q-border);
+  border-radius: var(--q-radius);
+  padding: 0;
+  gap: 0;
+}
+.pf .pf-report-stats .q-stat-value { font-size: 24px; }
+.pf .pf-sub-report { min-width: 0; }
+.pf .pf-sub-report > .pf-h4 {
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--q-border);
+}
+
+/* plain-language reading of the risk numbers */
+.pf .pf-plain {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--q-bg-elevated);
+  border: 1px solid var(--q-border);
+  border-radius: var(--q-radius);
+}
+.pf .pf-plain .pf-h4 { margin-bottom: 6px; }
+.pf .pf-plain ul {
+  margin: 0;
+  padding: 0 0 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--q-text-secondary);
+}
+
+.pf .pf-quote { text-align: right; min-width: 190px; }
+.pf .pf-quote-price {
+  margin: 8px 0 0;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--q-text-heading);
+}
+.pf .pf-quote-pct { margin-left: 10px; font-size: 14px; font-weight: 600; }
+.pf .pf-quote-line {
+  margin: 4px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+.pf .pf-feed {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--q-text-secondary);
+}
+.pf .pf-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--q-text-muted);
+  display: inline-block;
+}
+.pf .pf-dot--live { background: var(--q-bull); }
+.pf .pf-dot--warn { background: var(--q-warn); }
+.pf .pf-status {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.pf .pf-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.pf .pf-toolbar-group { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.pf .pf-tf {
+  font-family: var(--pf-sans);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: 13px;
+  background: transparent;
+  color: var(--q-text-secondary);
+  border: 1px solid var(--q-border-bright);
+  border-radius: var(--q-radius);
+  transition: background-color var(--q-transition), color var(--q-transition);
+}
+.pf .pf-tf:hover { background: var(--q-bg-hover); }
+.pf .pf-tf[aria-pressed='true'] {
+  background: var(--q-accent-dim);
+  border-color: var(--q-accent);
+  color: var(--q-text-heading);
+  font-weight: 600;
+}
+
+.pf .q-badge {
+  border-radius: var(--q-radius);
+  font-family: var(--pf-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 2px 8px;
+}
+.pf .q-badge--bull { background: var(--q-bull-dim); color: var(--q-bull); border: 1px solid var(--q-bull); }
+.pf .q-badge--warn { background: var(--q-warn-dim); color: var(--q-warn); border: 1px solid var(--q-warn); }
+.pf .q-badge--neutral { background: transparent; color: var(--q-text-secondary); border: 1px solid var(--q-border-bright); }
+
+/* chart plate */
+.pf .pf-plate {
+  border: 1px solid var(--q-border);
+  border-radius: var(--q-radius);
+  background: var(--q-bg-base);
+  padding: 12px;
+}
+.pf .pf-plate-grid {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 16px;
+  min-height: 292px;
+}
+.pf .pf-hl {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px 0 26px;
+  margin: 0;
+  font-family: var(--pf-mono);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: 13px;
+  color: var(--q-text-secondary);
+}
+.pf .pf-hl-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  border-top: 1px solid var(--q-border);
+  padding-top: 4px;
+}
+.pf .pf-hl-row dd { margin: 0; text-align: right; color: var(--q-text-primary); }
+.pf .pf-hl-row dt { margin: 0; font-family: var(--pf-sans); }
+.pf .pf-plate-body { position: relative; min-width: 0; }
+.pf .pf-collecting {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  z-index: 1;
+  font-size: 13px;
+  color: var(--q-text-secondary);
+}
+.pf .pf-collecting--warn { color: var(--q-warn); }
+.pf .pf-axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-family: var(--pf-mono);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: 12px;
+  color: var(--q-text-secondary);
+}
+.pf .pf-note {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--q-warn);
+}
+.pf .pf-empty-plate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  color: var(--q-text-secondary);
+  font-size: 14px;
+}
+
+/* ---------- ledger tables: 13px text, 32px rows, numbers right-aligned ---------- */
+.pf .q-table-wrap {
+  border: 1px solid var(--q-border);
+  border-radius: var(--q-radius);
+  background: var(--q-bg-surface);
+  overflow-x: auto;
+}
+.pf .q-table {
+  width: 100%;
+  font-family: var(--pf-sans);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: 13px;
+  border-collapse: collapse;
+}
+.pf .q-table th {
+  height: 32px;
+  background: var(--q-bg-elevated);
+  font-family: var(--pf-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--q-text-secondary);
+  text-align: left;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--q-border-bright);
+  white-space: nowrap;
+}
+.pf .q-table td {
+  height: 32px;
+  padding: 0 12px;
+  color: var(--q-text-primary);
+  border-bottom: 1px solid var(--q-border);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.pf .q-table tr:last-child td { border-bottom: 0; }
+.pf .q-table th.pf-r,
+.pf .q-table td.pf-r { text-align: right; font-family: var(--pf-mono); font-size: 13px; }
+.pf .q-table th.pf-r { font-family: var(--pf-sans); }
+.pf .q-table td.pf-text { font-family: var(--pf-sans); }
+.pf .q-table tbody tr:hover td { background: var(--q-bg-hover); }
+.pf .q-table tbody tr.pf-row--active td { background: var(--q-accent-dim); }
+.pf .q-table tbody tr.pf-row--clickable { cursor: pointer; }
+.pf .q-table td.pf-ticker { color: var(--q-accent); font-weight: 600; }
+.pf .q-table td.bull,
+.pf .q-table td.pf-up { color: var(--q-bull); }
+.pf .q-table td.bear,
+.pf .q-table td.pf-down { color: var(--q-bear); }
+.pf .pf-sub {
+  display: block;
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--q-text-secondary);
+}
+.pf .pf-tag { font-size: 12px; font-weight: 600; margin-left: 6px; }
+.pf .q-table td.pf-empty-cell {
+  text-align: center;
+  padding: 24px;
+  height: auto;
+  font-family: var(--pf-sans);
+  color: var(--q-text-secondary);
+}
+.pf .pf-tables > * + * { margin-top: 24px; }
+.pf .pf-sell {
+  color: var(--q-bear);
+  border-color: var(--q-bear);
+  min-height: 28px;
+}
+
+/* ---------- concentration ---------- */
+.pf .pf-conc { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.pf .pf-conc-head {
+  display: flex;
+  justify-content: space-between;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+.pf .pf-conc-head span:last-child { font-family: var(--pf-mono); }
+.pf .pf-bar { height: 6px; background: var(--q-bg-hover); border-radius: 3px; overflow: hidden; }
+.pf .pf-bar-fill { height: 100%; background: var(--q-accent); }
+.pf .pf-bar-fill--over { background: var(--q-warn); }
+
+/* ---------- paper trade ticket ---------- */
+.pf .pf-ticket {
+  background: var(--q-bg-surface);
+  border: 1px solid var(--q-border);
+  border-radius: var(--q-radius);
+  padding: 20px;
+}
+.pf .pf-ticket form { display: flex; flex-direction: column; gap: 16px; }
+.pf .pf-side { display: flex; gap: 8px; }
+.pf .pf-side button,
+.pf .pf-submit {
+  min-height: 40px;
+  font-family: var(--pf-sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  border: 1px solid var(--q-border-bright);
+  border-radius: var(--q-radius);
+  cursor: pointer;
+  transition: background-color var(--q-transition), color var(--q-transition), opacity var(--q-transition);
+}
+.pf .pf-side button {
+  flex: 1;
+  background: transparent;
+  color: var(--q-text-secondary);
+}
+.pf .pf-side button:hover { background: var(--q-bg-hover); }
+.pf .pf-side button[aria-pressed='true'] {
+  background: var(--q-accent-dim);
+  border-color: var(--q-accent);
+  color: var(--q-text-heading);
+}
+.pf .pf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--q-text-secondary);
+}
+.pf .pf-field .q-input,
+.pf .pf-input {
+  min-height: 40px;
+  padding: 0 10px;
+  background: var(--q-bg-base);
+  color: var(--q-text-heading);
+  border: 1px solid var(--q-border-bright);
+  border-radius: var(--q-radius);
+  font-family: var(--pf-mono);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.pf .pf-field .q-input:focus-visible,
+.pf .pf-side button:focus-visible,
+.pf .pf-submit:focus-visible,
+.pf .pf-tf:focus-visible {
+  outline: 2px solid var(--q-accent);
+  outline-offset: 2px;
+}
+.pf .pf-hint { font-size: 13px; font-weight: 400; letter-spacing: 0; color: var(--q-text-secondary); }
+.pf .pf-hint--bad { color: var(--q-bear); }
+.pf .pf-hint--live { color: var(--q-bull); }
+.pf .pf-hint--stale { color: var(--q-warn); }
+.pf .pf-submit {
+  width: 100%;
+  margin-top: 4px;
+  background: var(--q-accent);
+  border-color: var(--q-accent);
+  color: var(--pf-on-ink);
+}
+.pf .pf-submit:hover:not(:disabled) { opacity: 0.88; }
+.pf .pf-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+.pf .pf-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 10px;
+  font-size: 13px;
+  color: var(--q-bear);
+  background: var(--q-bear-dim);
+  border: 1px solid var(--q-bear);
+  border-radius: var(--q-radius);
+}
+.pf .pf-status-line { margin: 0; font-size: 14px; color: var(--q-text-secondary); }
+.pf .pf-status-line--bad { color: var(--q-bear); }
+
+/* ---------- narrow screens ---------- */
+@media (max-width: 960px) {
+  .pf .pf-split,
+  .pf .pf-risk-split { grid-template-columns: minmax(0, 1fr); }
+  .pf .pf-report-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pf .pf-stats { grid-template-columns: minmax(0, 1fr); }
+  .pf .pf-stats .q-stat-tile + .q-stat-tile { border-left: 0; border-top: 1px solid var(--q-border); }
+  .pf .pf-plate-grid { grid-template-columns: minmax(0, 1fr); }
+  .pf .pf-hl { flex-direction: row; padding: 0; gap: 12px; }
+  .pf .pf-report-head--quote { grid-template-columns: minmax(0, 1fr); }
+  .pf .pf-quote { text-align: left; }
+  .pf .pf-feed { justify-content: flex-start; }
+  .pf .pf-title { font-size: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf .pf-spin { animation: none; }
+  .pf .pf-tf,
+  .pf .pf-side button,
+  .pf .pf-submit { transition: none; }
+}

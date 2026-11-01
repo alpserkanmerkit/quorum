@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quorum — I08 Private Wealth</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f5f6f8}
+a{color:#163a6b}a:hover{color:#0b2547}
+</style>
+</helmet>
+<div style="width:100%;min-height:900px;background:#f5f6f8;color:#1a2233;font-family:'Source Sans 3',sans-serif;font-size:15px;line-height:22px;font-variant-numeric:tabular-nums lining-nums;box-sizing:border-box">
+
+  <!-- Top bar -->
+  <header style="background:#ffffff;border-bottom:1px solid #dfe3ea">
+    <div style="max-width:1280px;margin:0 auto;padding:0 32px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:8px 32px;min-height:64px">
+      <a href="#" style="display:flex;align-items:baseline;gap:10px;text-decoration:none;color:#0f2747">
+        <span style="font-weight:700;font-size:19px;letter-spacing:0.4px">Quorum</span>
+        <span style="font-size:14px;color:#4f5868">Private Client</span>
+      </a>
+      <nav aria-label="Primary" style="display:flex;flex-wrap:wrap;align-items:stretch;gap:4px;flex:1 1 auto">
+        <a href="#" aria-current="page" style="display:flex;align-items:center;min-height:44px;padding:0 12px;text-decoration:none;color:#0f2747;font-weight:600;box-shadow:inset 0 -2px 0 #0f2747">Intelligence Feed</a>
+        <a href="#" style="display:flex;align-items:center;min-height:44px;padding:0 12px;text-decoration:none;color:#4f5868">Portfolio &amp; Risk</a>
+        <a href="#" style="display:flex;align-items:center;min-height:44px;padding:0 12px;text-decoration:none;color:#4f5868">Strategy Boardroom</a>
+        <a href="#" style="display:flex;align-items:center;min-height:44px;padding:0 12px;text-decoration:none;color:#4f5868">Compliance</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:#4f5868">
+        <span>Viewing as <strong style="color:#1a2233;font-weight:600">Demo Fund Manager</strong> (Admin) · client preview</span>
+        <button type="button" aria-label="Account settings" style="width:44px;height:44px;border:1px solid #dfe3ea;border-radius:4px;background:#ffffff;color:#0f2747;display:flex;align-items:center;justify-content:center;cursor:pointer">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="7" r="3.5"/><path d="M3 18c1-3.5 4-5 7-5s6 1.5 7 5"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width:1280px;margin:0 auto;padding:28px 32px 56px;box-sizing:border-box;display:flex;flex-direction:column;gap:28px">
+
+    <!-- Page heading + controls -->
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px">
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <h1 style="margin:0;font-size:26px;line-height:32px;font-weight:600;color:#0f2747">Your portfolio today</h1>
+        <p style="margin:0;color:#4f5868;font-size:14px">Demo data · AI simulation · as of 18:40 · values in USD</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+        <span style="display:inline-flex;align-items:center;gap:8px;font-size:14px;color:#1a2233"><span style="width:8px;height:8px;border-radius:50%;background:#1e6b3c"></span>Updates live</span>
+        <button type="button" style="min-height:44px;padding:0 16px;border:1px solid #c5ccd8;border-radius:4px;background:#ffffff;color:#0f2747;font-family:inherit;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:8px">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5.5 3v10M10.5 3v10"/></svg>Pause updates
+        </button>
+        <button type="button" style="min-height:44px;padding:0 18px;border:0;border-radius:4px;background:#0f2747;color:#ffffff;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 8a5 5 0 11-1.5-3.6"/><path d="M12 1.5v3h-3"/></svg>Fetch latest
+        </button>
+      </div>
+    </div>
+
+    <!-- Portfolio summary -->
+    <section aria-label="Live Portfolio summary" style="background:#ffffff;border:1px solid #dfe3ea;border-radius:6px;display:flex;flex-wrap:wrap">
+      <div style="flex:1 1 300px;padding:24px 28px;box-sizing:border-box;border-right:1px solid #eceff3;display:flex;flex-direction:column;gap:16px">
+        <div>
+          <div style="font-size:14px;color:#4f5868">Live Portfolio · value of priced holdings</div>
+          <div style="font-size:30px;line-height:38px;font-weight:600;color:#0f2747;margin-top:4px">$105,878.00</div>
+          <div style="color:#1e6b3c;font-weight:600;margin-top:2px">▲ +$15,290.00 (+16.88%) <span style="color:#4f5868;font-weight:400">since purchase</span></div>
+        </div>
+        <dl style="margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:14px">
+          <dt style="color:#4f5868">Amount invested (priced)</dt><dd style="margin:0;text-align:right">$90,588.00</dd>
+          <dt style="color:#4f5868">Positions</dt><dd style="margin:0;text-align:right">5 (4 priced)</dd>
+          <dt style="color:#4f5868">Bitcoin, 0.8 BTC</dt><dd style="margin:0;text-align:right;color:#4f5868">not valued · no price</dd>
+        </dl>
+        <!-- Allocation bar: single-hue navy steps -->
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:14px;color:#4f5868">Share of priced value</div>
+          <div role="img" aria-label="NVDA 33.07%, MSFT 23.35%, GOLD 22.10%, AAPL 21.48%" style="display:flex;height:10px;border-radius:2px;overflow:hidden;gap:2px;background:#ffffff">
+            <span style="width:33.07%;background:#0f2747"></span>
+            <span style="width:23.35%;background:#2f5487"></span>
+            <span style="width:22.10%;background:#6b8bb8"></span>
+            <span style="width:21.48%;background:#a9bcd8"></span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13px;color:#4f5868">
+            <span style="display:inline-flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#0f2747"></span>NVDA 33.07%</span>
+            <span style="display:inline-flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#2f5487"></span>MSFT 23.35%</span>
+            <span style="display:inline-flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#6b8bb8"></span>GOLD 22.10%</span>
+            <span style="display:inline-flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#a9bcd8"></span>AAPL 21.48%</span>
+          </div>
+        </div>
+      </div>
+      <div style="flex:2 1 560px;min-width:0;padding:16px 0 8px">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:0 24px 8px">
+          <h2 style="margin:0;font-size:17px;line-height:24px;font-weight:600;color:#0f2747">Your holdings</h2>
+          <a href="#" style="font-size:14px">See full holdings in Portfolio &amp; Risk</a>
+        </div>
+        <div style="overflow-x:auto">
+          <table style="width:100%;min-width:600px;border-collapse:collapse;font-size:15px">
+            <thead>
+              <tr style="height:36px;color:#4f5868;font-size:13px;border-bottom:1px solid #dfe3ea">
+                <th scope="col" style="padding:0 24px;text-align:left;font-weight:600">Holding</th>
+                <th scope="col" style="padding:0 12px;text-align:right;font-weight:600">Quantity</th>
+                <th scope="col" style="padding:0 12px;text-align:right;font-weight:600">Bought at</th>
+                <th scope="col" style="padding:0 12px;text-align:right;font-weight:600">Price now</th>
+                <th scope="col" style="padding:0 12px;text-align:right;font-weight:600">Value</th>
+                <th scope="col" style="padding:0 24px 0 12px;text-align:right;font-weight:600">Gain since purchase</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="height:44px;border-bottom:1px solid #eceff3"><td style="padding:0 24px"><strong style="font-weight:600">NVDA</strong> <span style="color:#4f5868;font-size:14px">Nvidia</span></td><td style="padding:0 12px;text-align:right">40</td><td style="padding:0 12px;text-align:right">640.00</td><td style="padding:0 12px;text-align:right">875.30</td><td style="padding:0 12px;text-align:right;font-weight:600">35,012.00</td><td style="padding:0 24px 0 12px;text-align:right;color:#1e6b3c">▲ +9,412.00 · +36.77%</td></tr>
+              <tr style="height:44px;border-bottom:1px solid #eceff3"><td style="padding:0 24px"><strong style="font-weight:600">MSFT</strong> <span style="color:#4f5868;font-size:14px">Microsoft</span></td><td style="padding:0 12px;text-align:right">60</td><td style="padding:0 12px;text-align:right">380.00</td><td style="padding:0 12px;text-align:right">412.10</td><td style="padding:0 12px;text-align:right;font-weight:600">24,726.00</td><td style="padding:0 24px 0 12px;text-align:right;color:#1e6b3c">▲ +1,926.00 · +8.45%</td></tr>
+              <tr style="height:44px;border-bottom:1px solid #eceff3"><td style="padding:0 24px"><strong style="font-weight:600">GOLD</strong> <span style="color:#4f5868;font-size:14px">Gold</span></td><td style="padding:0 12px;text-align:right">10</td><td style="padding:0 12px;text-align:right">2,150.00</td><td style="padding:0 12px;text-align:right">2,340.00</td><td style="padding:0 12px;text-align:right;font-weight:600">23,400.00</td><td style="padding:0 24px 0 12px;text-align:right;color:#1e6b3c">▲ +1,900.00 · +8.84%</td></tr>
+              <tr style="height:44px;border-bottom:1px solid #eceff3"><td style="padding:0 24px"><strong style="font-weight:600">AAPL</strong> <span style="color:#4f5868;font-size:14px">Apple</span></td><td style="padding:0 12px;text-align:right">120</td><td style="padding:0 12px;text-align:right">172.40</td><td style="padding:0 12px;text-align:right">189.50</td><td style="padding:0 12px;text-align:right;font-weight:600">22,740.00</td><td style="padding:0 24px 0 12px;text-align:right;color:#1e6b3c">▲ +2,052.00 · +9.92%</td></tr>
+              <tr style="height:44px"><td style="padding:0 24px"><strong style="font-weight:600">BTC</strong> <span style="color:#4f5868;font-size:14px">Bitcoin</span></td><td style="padding:0 12px;text-align:right">0.8</td><td style="padding:0 12px;text-align:right">52,000.00</td><td style="padding:0 12px;text-align:right;color:#4f5868">n/a</td><td style="padding:0 12px;text-align:right;color:#4f5868">n/a</td><td style="padding:0 24px 0 12px;text-align:right;color:#4f5868">n/a · no price in feed</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin:8px 24px 0;font-size:13px;color:#5b6474">Value = quantity × demo price. Reference prices: AAPL 189.50 · NVDA 875.30 · MSFT 412.10 · GOLD 2,340 · TSLA 248.20 · SPX 5,780 · NDX 20,150 · VIX 18.50 · WTI 78.40 · EURUSD 1.0920. Daily change not available.</p>
+      </div>
+    </section>
+
+    <!-- What's moving your portfolio -->
+    <section aria-label="What's moving your portfolio" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:8px">
+        <div>
+          <h2 style="margin:0;font-size:21px;line-height:28px;font-weight:600;color:#0f2747">What's moving your portfolio</h2>
+          <p style="margin:2px 0 0;color:#4f5868;font-size:14px">6 stories, ordered by how much of your priced value each one touches. Read by Quorum's AI agents (simulation); each shows its source and how reliable that source is.</p>
+        </div>
+        <span style="font-size:14px;color:#4f5868">3 assessed · 3 awaiting assessment</span>
+      </div>
+
+      <div style="background:#ffffff;border:1px solid #dfe3ea;border-radius:6px;display:flex;flex-direction:column">
+
+        <!-- Story 1: Fed -->
+        <article style="display:flex;flex-wrap:wrap;gap:16px 28px;padding:20px 24px;border-bottom:1px solid #eceff3">
+          <div style="flex:1 1 220px;max-width:280px;display:flex;flex-direction:column;gap:6px">
+            <div style="font-size:13px;color:#4f5868;font-weight:600;letter-spacing:0.3px">TOUCHES</div>
+            <div style="font-weight:600">AAPL · NVDA · MSFT · GOLD</div>
+            <div style="font-size:14px;color:#4f5868">All 4 priced holdings · $105,878.00 (100%)</div>
+          </div>
+          <div style="flex:3 1 420px;min-width:0;display:flex;flex-direction:column;gap:6px">
+            <h3 style="margin:0;font-size:17px;line-height:24px;font-weight:600">Fed officials signal patience on rate cuts as inflation cools unevenly</h3>
+            <p style="margin:0;color:#2e3747">In plain terms: interest rates may stay where they are for longer. The agents read this as a headwind for the portfolio as a whole, because it is a broad, economy-wide story rather than news about one company.</p>
+            <div style="font-size:13px;color:#5b6474">Source: Demo Macro Desk · source reliability 95/100 · Macro · AI simulation</div>
+          </div>
+          <div style="flex:1 1 160px;max-width:200px;display:flex;flex-direction:column;gap:4px;align-items:flex-start">
+            <span style="display:inline-flex;align-items:center;gap:6px;color:#a3302a;font-weight:600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3v10M4 9l4 4 4-4"/></svg>Negative</span>
+            <span style="font-size:14px;color:#2e3747">AlphaScore <strong style="font-weight:600">76</strong> / 100</span>
+            <span style="font-size:13px;color:#5b6474">Confidence of the signal, not a forecast</span>
+          </div>
+        </article>
+
+        <!-- Story 2: Nvidia -->
+        <article style="display:flex;flex-wrap:wrap;gap:16px 28px;padding:20px 24px;border-bottom:1px solid #eceff3">
+          <div style="flex:1 1 220px;max-width:280px;display:flex;flex-direction:column;gap:6px">
+            <div style="font-size:13px;color:#4f5868;font-weight:600;letter-spacing:0.3px">TOUCHES</div>
+            <div style="font-weight:600">NVDA · 40 shares</div>
+            <div style="font-size:14px;color:#4f5868">$35,012.00 · 33.07% · your largest priced holding</div>
+          </div>
+          <div style="flex:3 1 420px;min-width:0;display:flex;flex-direction:column;gap:6px">
+            <h3 style="margin:0;font-size:17px;line-height:24px;font-weight:600">Nvidia extends AI infrastructure rally as data-center demand beats estimates</h3>
+            <p style="margin:0;color:#2e3747">In plain terms: demand for the company's data-center products came in above what analysts expected. The agents read this as supportive for your Nvidia shares, which are already up 36.77% from your purchase price.</p>
+            <div style="font-size:13px;color:#5b6474">Source: Demo Markets Wire · source reliability 80/100 · Stocks · AI simulation</div>
+          </div>
+          <div style="flex:1 1 160px;max-width:200px;display:flex;flex-direction:column;gap:4px;align-items:flex-start">
+            <span style="display:inline-flex;align-items:center;gap:6px;color:#1e6b3c;font-weight:600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 13V3M4 7l4-4 4 4"/></svg>Positive</span>
+            <span style="font-size:14px;color:#2e3747">AlphaScore <strong style="font-weight:600">88</strong> / 100</span>
+          </div>
+        </article>
+
+        <!-- Story 3: Gold (pending) -->
+        <article style="display:flex;flex-wrap:wrap;gap:16px 28px;padding:20px 24px;border-bottom:1px solid #eceff3">
+          <div style="flex:1 1 220px;max-width:280px;display:flex;flex-direction:column;gap:6px">
+            <div style="font-size:13px;color:#4f5868;font-weight:600;letter-spacing:0.3px">TOUCHES</div>
+            <div style="font-weight:600">GOLD · 10 oz</div>
+            <div style="font-size:14px;color:#4f5868">$23,400.00 · 22.10%</div>
+          </div>
+          <div style="flex:3 1 420px;min-width:0;display:flex;flex-direction:column;gap:6px">
+            <h3 style="margin:0;font-size:17px;line-height:24px;font-weight:600">Gold steadies near record territory as real yields soften</h3>
+            <p style="margin:0;color:#2e3747">Directly about your gold holding. The agents have not finished their assessment, so we are not showing a direction yet.</p>
+            <div style="font-size:13px;color:#5b6474">Source: Demo Energy Brief · source reliability 80/100 · Commodities · AI simulation</div>
+          </div>
+          <div style="flex:1 1 160px;max-width:200px;display:flex;flex-direction:column;gap:4px;align-items:flex-start">
+            <span style="display:inline-flex;align-items:center;gap:6px;color:#4f5868;font-weight:600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.5 1.5"/></svg>Awaiting assessment</span>
+            <span style="font-size:14px;color:#4f5868">AlphaScore pending</span>
+          </div>
+        </article>
+
+        <!-- Story 4: Apple (pending) -->
+        <article style="display:flex;flex-wrap:wrap;gap:16px 28px;padding:20px 24px;border-bottom:1px solid #eceff3">
+          <div style="flex:1 1 220px;max-width:280px;display:flex;flex-direction:column;gap:6px">
+            <div style="font-size:13px;color:#4f5868;font-weight:600;letter-spacing:0.3px">TOUCHES</div>
+            <div style="font-weight:600">AAPL · 120 shares</div>
+            <div style="font-size:14px;color:#4f5868">$22,740.00 · 21.48%</div>
+          </div>
+          <div style="flex:3 1 420px;min-width:0;display:flex;flex-direction:column;gap:6px">
+            <h3 style="margin:0;font-size:17px;line-height:24px;font-weight:600">Apple supplier checks point to steady iPhone build plans for next quarter</h3>
+            <p style="margin:0;color:#2e3747">About the company behind your Apple shares. Assessment is still in progress; we will show the agents' reading once they agree.</p>
+            <div style="font-size:13px;color:#5b6474">Source: Demo Markets Wire · source reliability 80/100 · Stocks · AI simulation</div>
+          </div>
+          <div style="flex:1 1 160px;max-width:200px;display:flex;flex-direction:column;gap:4px;align-items:flex-start">
+            <span style="display:inline-flex;align-items:center;gap:6px;color:#4f5868;font-weight:600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.5 1.5"/></svg>Awaiting assessment</span>
+            <span style="font-size:14px;color:#4f5868">AlphaScore pending</span>
+          </div>
+        </article>
+
+        <!-- Story 5: Bitcoin -->
+        <article style="display:flex;flex-wrap:wrap;gap:16px 28px;padding:20px 24px;border-bottom:1px solid #eceff3">
+          <div style="flex:1 1 220px;max-width:280px;display:flex;flex-direction:column;gap:6px">
+            <div style="font-size:13px;color:#4f5868;font-weight:600;letter-spacing:0.3px">TOUCHES</div>
+            <div style="font-weight:600">BTC · 0.8 BTC</div>
+            <div style="font-size:14px;color:#4f5868">Value n/a · no price in feed</div>
+          </div>
+          <div style="flex:3 1 420px;min-width:0;display:flex;flex-direction:column;gap:6px">
+            <h3 style="margin:0;font-size:17px;line-height:24px;font-weight:600">Bitcoin holds above key level after spot ETF inflows return</h3>
+            <p style="margin:0;color:#2e3747">In plain terms: money is flowing back into Bitcoin funds. The agents read this as supportive for your Bitcoin, but we cannot size the effect in dollars because there is no Bitcoin price in your data.</p>
+            <div style="font-size:13px;color:#5b6474">Source: Demo Crypto Ledger · source reliability 80/100 · Crypto · AI simulation</div>
+          </div>
+          <div style="flex:1 1 160px;max-width:200px;display:flex;flex-direction:column;gap:4px;align-items:flex-start">
+            <span style="display:inline-flex;align-items:center;gap:6px;color:#1e6b3c;font-weight:600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 13V3M4 7l4-4 4 4"/></svg>Positive</span>
+            <span style="font-size:14px;color:#2e3747">AlphaScore <strong style="font-weight:600">91</strong> / 100</span>
+          </div>
+        </article>
+
+        <!-- Story 6: Oil (no exposure) -->
+        <article style="display:flex;flex-wrap:wrap;gap:16px 28px;padding:16px 24px;background:#fafbfc;border-radius:0 0 6px 6px">
+          <div style="flex:1 1 220px;max-width:280px;display:flex;flex-direction:column;gap:4px">
+            <div style="font-size:13px;color:#4f5868;font-weight:600;letter-spacing:0.3px">TOUCHES</div>
+            <div style="color:#4f5868">None of your holdings directly</div>
+          </div>
+          <div style="flex:3 1 420px;min-width:0;display:flex;flex-direction:column;gap:4px">
+            <h3 style="margin:0;font-size:16px;line-height:22px;font-weight:600;color:#2e3747">Oil edges higher as OPEC+ discussion keeps supply risk premium in play</h3>
+            <div style="font-size:13px;color:#5b6474">Source: Demo Energy Brief · source reliability 80/100 · Commodities · AI simulation · shown for context (WTI 78.40)</div>
+          </div>
+          <div style="flex:1 1 160px;max-width:200px;display:flex;align-items:flex-start">
+            <span style="font-size:14px;color:#4f5868">AlphaScore pending</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Compliance note + system status -->
+    <section aria-label="Important information" style="display:flex;flex-wrap:wrap;gap:20px">
+      <div style="flex:3 1 520px;background:#ffffff;border:1px solid #dfe3ea;border-radius:6px;padding:20px 24px;display:flex;flex-direction:column;gap:8px">
+        <h2 style="margin:0;font-size:16px;line-height:22px;font-weight:600;color:#0f2747">Important information</h2>
+        <p style="margin:0;font-size:14px;line-height:21px;color:#2e3747">This view uses demonstration data and a simulated AI assessment. It is provided for discussion with your relationship team and is not investment advice, a recommendation or an offer to buy or sell. AlphaScore describes the strength of a news signal, not an expected return. Values exclude Bitcoin, for which no price is available.</p>
+        <p style="margin:0;font-size:13px;color:#5b6474">Reviewed against compliance dataset v2 (active) · team Quorum Compliance · <a href="#">How we score news</a></p>
+      </div>
+      <div style="flex:1 1 280px;background:#ffffff;border:1px solid #dfe3ea;border-radius:6px;padding:20px 24px;display:flex;flex-direction:column;gap:8px">
+        <h2 style="margin:0;font-size:16px;line-height:22px;font-weight:600;color:#0f2747">Service status</h2>
+        <dl style="margin:0;display:grid;grid-template-columns:1fr auto;gap:6px 16px;font-size:14px">
+          <dt style="color:#4f5868">Data service</dt><dd style="margin:0;text-align:right">Online</dd>
+          <dt style="color:#4f5868">AI assessment</dt><dd style="margin:0;text-align:right">Simulation</dd>
+          <dt style="color:#4f5868">News feed</dt><dd style="margin:0;text-align:right">Live</dd>
+          <dt style="color:#4f5868">Quantitative models</dt><dd style="margin:0;text-align:right">Standby</dd>
+          <dt style="color:#4f5868">Compliance dataset</dt><dd style="margin:0;text-align:right">Active · v2</dd>
+        </dl>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

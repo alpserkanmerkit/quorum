@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quorum — News &amp; quote monitor (Workspace-class)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;family=Source+Code+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B1420}
+a{color:#7FBDEB}a:hover{color:#B5DAF5}
+</style>
+</helmet>
+<div style="min-height:900px;width:100%;box-sizing:border-box;background:#0B1420;color:#DCE4EE;font-family:'Source Sans 3',sans-serif;font-size:13px;line-height:1.35;display:flex;flex-direction:column">
+
+<!-- App bar -->
+<header style="display:flex;flex-wrap:wrap;align-items:stretch;gap:0 16px;padding:0 12px;background:#0E1A29;border-bottom:1px solid #223349">
+<div style="display:flex;align-items:center;gap:10px;min-height:40px">
+<span style="font-weight:700;letter-spacing:.14em;font-size:13px;color:#F2F6FA">QUORUM</span>
+<span style="width:1px;height:16px;background:#2C3F59"></span>
+<span style="color:#93A3B8;font-size:12px">Decision-support desk</span>
+</div>
+<nav aria-label="Applications" style="display:flex;flex-wrap:wrap;align-items:stretch">
+<a href="#feed" aria-current="page" style="display:flex;align-items:center;padding:0 14px;min-height:40px;color:#F2F6FA;text-decoration:none;font-weight:600;border-bottom:2px solid #5AA9E6;background:#132438">Intelligence Feed</a>
+<a href="#portfolio" style="display:flex;align-items:center;padding:0 14px;min-height:40px;color:#A9B7C9;text-decoration:none;border-bottom:2px solid transparent">Portfolio &amp; Risk</a>
+<a href="#boardroom" style="display:flex;align-items:center;padding:0 14px;min-height:40px;color:#A9B7C9;text-decoration:none;border-bottom:2px solid transparent">Strategy Boardroom</a>
+<a href="#compliance" style="display:flex;align-items:center;padding:0 14px;min-height:40px;color:#A9B7C9;text-decoration:none;border-bottom:2px solid transparent">Compliance</a>
+</nav>
+<div style="flex:1 1 220px;display:flex;align-items:center;justify-content:flex-end;gap:12px;min-height:40px;flex-wrap:wrap">
+<label for="q5" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Search headlines, symbols, sources</label>
+<div style="display:flex;align-items:center;gap:6px;background:#0B1420;border:1px solid #2C3F59;padding:0 8px;height:30px;min-width:200px;flex:0 1 280px">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#93A3B8" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+<input id="q5" type="search" placeholder="Headline, symbol or source" style="flex:1;min-width:0;background:transparent;border:0;outline:none;color:#DCE4EE;font:inherit;font-size:12px">
+</div>
+<span style="font-size:12px;color:#A9B7C9;white-space:nowrap">Demo Fund Manager <span style="color:#93A3B8">· Admin</span></span>
+</div>
+</header>
+
+<!-- Toolbar -->
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:6px 12px;background:#0B1420;border-bottom:1px solid #223349">
+<h1 style="margin:0;font-size:15px;font-weight:600;color:#F2F6FA">News &amp; Quote Monitor</h1>
+<span style="font-size:12px;color:#93A3B8">Demo data · AI simulation · as of 18:40</span>
+<div style="flex:1"></div>
+<div role="group" aria-label="Feed mode" style="display:flex;border:1px solid #2C3F59">
+<button type="button" aria-pressed="true" style="min-height:32px;padding:0 12px;background:#17304D;color:#F2F6FA;border:0;font:inherit;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#46B98A"></span>Live</button>
+<button type="button" aria-pressed="false" style="min-height:32px;padding:0 12px;background:transparent;color:#A9B7C9;border:0;border-left:1px solid #2C3F59;font:inherit;font-size:12px;cursor:pointer">Paused</button>
+</div>
+<button type="button" style="min-height:44px;padding:0 18px;background:#2B6CA3;color:#FFFFFF;border:1px solid #3B82BF;font:inherit;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"></path><path d="M20 4v7h-7"></path></svg>Fetch Latest</button>
+</div>
+
+<!-- Quote strip -->
+<div role="region" aria-label="Quote strip" style="display:flex;flex-wrap:wrap;align-items:center;gap:0;background:#0E1A29;border-bottom:1px solid #223349;font-family:'Source Code Pro',monospace;font-variant-numeric:tabular-nums lining-nums;font-size:12px">
+<span style="padding:6px 12px;color:#93A3B8;font-family:'Source Sans 3',sans-serif;font-size:11px;letter-spacing:.06em">LAST · no daily change in dataset</span>
+<span style="padding:6px 12px;border-left:1px solid #1A2A3F"><span style="color:#93A3B8">AAPL</span> <span style="color:#F2F6FA">189.50</span></span>
+<span style="padding:6px 12px;border-left:1px solid #1A2A3F"><span style="color:#93A3B8">NVDA</span> <span style="color:#F2F6FA">875.30</span></span>
+<span style="padding:6px 12px;border-left:1px solid #1A2A3F"><span style="color:#93A3B8">MSFT</span> <span style="color:#F2F6FA">412.10</span></span>
+<span style="padding:6px 12px;border-left:1px solid #1A2A3F"><span style="color:#93A3B8">TSLA</span> <span style="color:#F2F6FA">248.20</span></span>
+<span style="padding:6px 12px;border-left:1px solid #1A2A3F"><span style="color:#93A3B8">SPX</span> <span style="color:#F2F6FA">5,780</span></span>
+<span style="padding:6px 12px;border-left:1px solid #1A2A3F"><span style="color:#93A3B8">NDX</span> <span style="color:#F2F6FA">20,150</span></span>
+<span style="padding:6px 12px;border-left:1px solid #1A2A3F"><span style="color:#93A3B8">VIX</span> <span style="color:#F2F6FA">18.50</span></span>
+<span style="padding:6px 12px;border-left:1px solid #1A2A3F"><span style="color:#93A3B8">GOLD</span> <span style="color:#F2F6FA">2,340</span></span>
+<span style="padding:6px 12px;border-left:1px solid #1A2A3F"><span style="color:#93A3B8">WTI</span> <span style="color:#F2F6FA">78.40</span></span>
+<span style="padding:6px 12px;border-left:1px solid #1A2A3F"><span style="color:#93A3B8">EURUSD</span> <span style="color:#F2F6FA">1.0920</span></span>
+</div>
+
+<!-- Main -->
+<main style="flex:1;display:flex;flex-wrap:wrap;align-items:stretch;gap:1px;background:#223349">
+
+<!-- Left column: news monitor + quote monitor -->
+<div style="flex:7 1 620px;min-width:0;display:flex;flex-direction:column;gap:1px">
+
+<section aria-labelledby="nm-h" style="background:#101B2A;display:flex;flex-direction:column">
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:0 12px;min-height:34px;background:#142235;border-bottom:1px solid #223349">
+<h2 id="nm-h" style="margin:0;font-size:12px;font-weight:700;letter-spacing:.08em;color:#F2F6FA">NEWS MONITOR</h2>
+<span style="font-size:12px;color:#93A3B8">6 items · 3 scored · 3 pending score</span>
+<div style="flex:1"></div>
+<span style="font-size:11px;color:#93A3B8">Sort: dataset order</span>
+</div>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:6px 12px;border-bottom:1px solid #223349">
+<div role="group" aria-label="Category" style="display:flex;flex-wrap:wrap;border:1px solid #2C3F59">
+<button type="button" aria-pressed="true" style="min-height:32px;padding:0 10px;background:#17304D;color:#F2F6FA;border:0;font:inherit;font-size:12px;font-weight:600;cursor:pointer">All <span style="font-family:'Source Code Pro',monospace;color:#A9B7C9">6</span></button>
+<button type="button" aria-pressed="false" style="min-height:32px;padding:0 10px;background:transparent;color:#A9B7C9;border:0;border-left:1px solid #2C3F59;font:inherit;font-size:12px;cursor:pointer">Stocks <span style="font-family:'Source Code Pro',monospace">2</span></button>
+<button type="button" aria-pressed="false" style="min-height:32px;padding:0 10px;background:transparent;color:#A9B7C9;border:0;border-left:1px solid #2C3F59;font:inherit;font-size:12px;cursor:pointer">Macro <span style="font-family:'Source Code Pro',monospace">1</span></button>
+<button type="button" aria-pressed="false" style="min-height:32px;padding:0 10px;background:transparent;color:#A9B7C9;border:0;border-left:1px solid #2C3F59;font:inherit;font-size:12px;cursor:pointer">Crypto <span style="font-family:'Source Code Pro',monospace">1</span></button>
+<button type="button" aria-pressed="false" style="min-height:32px;padding:0 10px;background:transparent;color:#A9B7C9;border:0;border-left:1px solid #2C3F59;font:inherit;font-size:12px;cursor:pointer">Commodities <span style="font-family:'Source Code Pro',monospace">2</span></button>
+</div>
+<div style="display:flex;align-items:center;gap:6px">
+<label for="rel5" style="font-size:12px;color:#93A3B8">Source reliability</label>
+<select id="rel5" style="min-height:32px;background:#0B1420;color:#DCE4EE;border:1px solid #2C3F59;font:inherit;font-size:12px;padding:0 6px">
+<option>All sources</option>
+<option>≥ 80 (6 items)</option>
+<option>≥ 95 (1 item)</option>
+</select>
+</div>
+<div style="display:flex;align-items:center;gap:6px">
+<label for="st5" style="font-size:12px;color:#93A3B8">Score status</label>
+<select id="st5" style="min-height:32px;background:#0B1420;color:#DCE4EE;border:1px solid #2C3F59;font:inherit;font-size:12px;padding:0 6px">
+<option>Scored + pending</option>
+<option>Scored (3)</option>
+<option>Pending (3)</option>
+</select>
+</div>
+</div>
+<div style="overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font-size:13px;min-width:760px">
+<thead>
+<tr>
+<th scope="col" style="text-align:right;padding:0 8px 0 12px;height:30px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#93A3B8;border-bottom:1px solid #223349;width:28px">#</th>
+<th scope="col" style="text-align:left;padding:0 10px;height:30px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#93A3B8;border-bottom:1px solid #223349">HEADLINE</th>
+<th scope="col" style="text-align:left;padding:0 10px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#93A3B8;border-bottom:1px solid #223349">CATEGORY</th>
+<th scope="col" style="text-align:left;padding:0 10px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#93A3B8;border-bottom:1px solid #223349">SOURCE</th>
+<th scope="col" style="text-align:right;padding:0 10px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#93A3B8;border-bottom:1px solid #223349">REL.</th>
+<th scope="col" style="text-align:right;padding:0 10px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#93A3B8;border-bottom:1px solid #223349">SCORE</th>
+<th scope="col" style="text-align:left;padding:0 12px 0 10px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#93A3B8;border-bottom:1px solid #223349">SENTIMENT</th>
+</tr>
+</thead>
+<tbody style="font-variant-numeric:tabular-nums lining-nums">
+<tr>
+<td style="text-align:right;padding:0 8px 0 12px;height:32px;border-bottom:1px solid #1A2A3F;color:#93A3B8;font-family:'Source Code Pro',monospace;font-size:12px">1</td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F"><a href="#story-1" style="display:block;line-height:32px;color:#E6EDF5;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:420px">Nvidia extends AI infrastructure rally as data-center demand beats estimates</a></td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F;font-size:11px;letter-spacing:.04em;color:#A9B7C9">STOCKS</td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F;white-space:nowrap;color:#A9B7C9">Demo Markets Wire</td>
+<td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;font-family:'Source Code Pro',monospace">80</td>
+<td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;font-family:'Source Code Pro',monospace;font-weight:600;color:#F2F6FA">88</td>
+<td style="padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;white-space:nowrap;color:#46B98A;font-size:12px;font-weight:600">▲ Positive</td>
+</tr>
+<tr aria-selected="true" style="background:#17304D">
+<td style="text-align:right;padding:0 8px 0 12px;height:32px;border-bottom:1px solid #1A2A3F;color:#F2F6FA;font-family:'Source Code Pro',monospace;font-size:12px;box-shadow:inset 2px 0 0 #5AA9E6">2</td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F"><a href="#story-2" aria-current="true" style="display:block;line-height:32px;color:#FFFFFF;font-weight:600;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:420px">Fed officials signal patience on rate cuts as inflation cools unevenly</a></td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F;font-size:11px;letter-spacing:.04em;color:#C9D5E3">MACRO</td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F;white-space:nowrap;color:#C9D5E3">Demo Macro Desk</td>
+<td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;font-family:'Source Code Pro',monospace;color:#F2F6FA">95</td>
+<td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;font-family:'Source Code Pro',monospace;font-weight:600;color:#FFFFFF">76</td>
+<td style="padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;white-space:nowrap;color:#F58C86;font-size:12px;font-weight:600">▼ Negative</td>
+</tr>
+<tr>
+<td style="text-align:right;padding:0 8px 0 12px;height:32px;border-bottom:1px solid #1A2A3F;color:#93A3B8;font-family:'Source Code Pro',monospace;font-size:12px">3</td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F"><a href="#story-3" style="display:block;line-height:32px;color:#E6EDF5;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:420px">Bitcoin holds above key level after spot ETF inflows return</a></td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F;font-size:11px;letter-spacing:.04em;color:#A9B7C9">CRYPTO</td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F;white-space:nowrap;color:#A9B7C9">Demo Crypto Ledger</td>
+<td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;font-family:'Source Code Pro',monospace">80</td>
+<td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;font-family:'Source Code Pro',monospace;font-weight:600;color:#F2F6FA">91</td>
+<td style="padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;white-space:nowrap;color:#46B98A;font-size:12px;font-weight:600">▲ Positive</td>
+</tr>
+<tr>
+<td style="text-align:right;padding:0 8px 0 12px;height:32px;border-bottom:1px solid #1A2A3F;color:#93A3B8;font-family:'Source Code Pro',monospace;font-size:12px">4</td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F"><a href="#story-4" style="display:block;line-height:32px;color:#C9D5E3;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:420px">Apple supplier checks point to steady iPhone build plans for next quarter</a></td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F;font-size:11px;letter-spacing:.04em;color:#A9B7C9">STOCKS</td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F;white-space:nowrap;color:#A9B7C9">Demo Markets Wire</td>
+<td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;font-family:'Source Code Pro',monospace">80</td>
+<td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;font-family:'Source Code Pro',monospace;color:#93A3B8">—</td>
+<td style="padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;white-space:nowrap;color:#E0B04F;font-size:12px">◌ Pending score</td>
+</tr>
+<tr>
+<td style="text-align:right;padding:0 8px 0 12px;height:32px;border-bottom:1px solid #1A2A3F;color:#93A3B8;font-family:'Source Code Pro',monospace;font-size:12px">5</td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F"><a href="#story-5" style="display:block;line-height:32px;color:#C9D5E3;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:420px">Oil edges higher as OPEC+ discussion keeps supply risk premium in play</a></td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F;font-size:11px;letter-spacing:.04em;color:#A9B7C9">COMMODITIES</td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F;white-space:nowrap;color:#A9B7C9">Demo Energy Brief</td>
+<td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;font-family:'Source Code Pro',monospace">80</td>
+<td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;font-family:'Source Code Pro',monospace;color:#93A3B8">—</td>
+<td style="padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;white-space:nowrap;color:#E0B04F;font-size:12px">◌ Pending score</td>
+</tr>
+<tr>
+<td style="text-align:right;padding:0 8px 0 12px;height:32px;border-bottom:1px solid #1A2A3F;color:#93A3B8;font-family:'Source Code Pro',monospace;font-size:12px">6</td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F"><a href="#story-6" style="display:block;line-height:32px;color:#C9D5E3;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:420px">Gold steadies near record territory as real yields soften</a></td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F;font-size:11px;letter-spacing:.04em;color:#A9B7C9">COMMODITIES</td>
+<td style="padding:0 10px;border-bottom:1px solid #1A2A3F;white-space:nowrap;color:#A9B7C9">Demo Energy Brief</td>
+<td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;font-family:'Source Code Pro',monospace">80</td>
+<td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;font-family:'Source Code Pro',monospace;color:#93A3B8">—</td>
+<td style="padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;white-space:nowrap;color:#E0B04F;font-size:12px">◌ Pending score</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:4px 16px;padding:6px 12px;font-size:11px;color:#93A3B8">
+<span>Score = AlphaScore 0–100 (AI simulation)</span>
+<span>Rel. = source reliability 0–100 (dataset)</span>
+<span>Scored avg <span style="font-family:'Source Code Pro',monospace;color:#C9D5E3">85.0</span> (n = 3)</span>
+</div>
+</section>
+
+<section aria-labelledby="qm-h" style="background:#101B2A;flex:1;display:flex;flex-direction:column">
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:0 12px;min-height:34px;background:#142235;border-bottom:1px solid #223349">
+<h2 id="qm-h" style="margin:0;font-size:12px;font-weight:700;letter-spacing:.08em;color:#F2F6FA">QUOTE MONITOR</h2>
+<span style="font-size:12px;color:#93A3B8">10 instruments · joined to Live Portfolio (5 positions)</span>
+<div style="flex:1"></div>
+<span style="font-size:11px;color:#93A3B8">Demo data · as of 18:40</span>
+</div>
+<div style="overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font-size:13px;min-width:700px">
+<thead>
+<tr>
+<th scope="col" style="text-align:left;padding:0 10px 0 12px;height:28px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#93A3B8;border-bottom:1px solid #223349">SYMBOL</th>
+<th scope="col" style="text-align:left;padding:0 10px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#93A3B8;border-bottom:1px solid #223349">CLASS</th>
+<th scope="col" style="text-align:right;padding:0 10px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#93A3B8;border-bottom:1px solid #223349">LAST</th>
+<th scope="col" style="text-align:right;padding:0 10px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#93A3B8;border-bottom:1px solid #223349">CHG</th>
+<th scope="col" style="text-align:right;padding:0 10px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#93A3B8;border-bottom:1px solid #223349">HELD</th>
+<th scope="col" style="text-align:right;padding:0 10px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#93A3B8;border-bottom:1px solid #223349">AVG COST</th>
+<th scope="col" style="text-align:right;padding:0 10px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#93A3B8;border-bottom:1px solid #223349">MKT VALUE</th>
+<th scope="col" style="text-align:right;padding:0 12px 0 10px;font-size:11px;font-weight:600;letter-spacing:.04em;color:#93A3B8;border-bottom:1px solid #223349">UNREAL. P&amp;L</th>
+</tr>
+</thead>
+<tbody style="font-family:'Source Code Pro',monospace;font-size:12px;font-variant-numeric:tabular-nums lining-nums">
+<tr><td style="padding:0 10px 0 12px;height:28px;border-bottom:1px solid #1A2A3F;color:#F2F6FA;font-weight:600">AAPL</td><td style="padding:0 10px;border-bottom:1px solid #1A2A3F;color:#A9B7C9;font-family:'Source Sans 3',sans-serif">Equity</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#F2F6FA">189.50</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">n/a</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F">120</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F">172.40</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#F2F6FA">22,740.00</td><td style="text-align:right;padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;color:#46B98A">+2,052.00 ▲</td></tr>
+<tr><td style="padding:0 10px 0 12px;height:28px;border-bottom:1px solid #1A2A3F;color:#F2F6FA;font-weight:600">NVDA</td><td style="padding:0 10px;border-bottom:1px solid #1A2A3F;color:#A9B7C9;font-family:'Source Sans 3',sans-serif">Equity</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#F2F6FA">875.30</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">n/a</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F">40</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F">640.00</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#F2F6FA">35,012.00</td><td style="text-align:right;padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;color:#46B98A">+9,412.00 ▲</td></tr>
+<tr><td style="padding:0 10px 0 12px;height:28px;border-bottom:1px solid #1A2A3F;color:#F2F6FA;font-weight:600">MSFT</td><td style="padding:0 10px;border-bottom:1px solid #1A2A3F;color:#A9B7C9;font-family:'Source Sans 3',sans-serif">Equity</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#F2F6FA">412.10</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">n/a</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F">60</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F">380.00</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#F2F6FA">24,726.00</td><td style="text-align:right;padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;color:#46B98A">+1,926.00 ▲</td></tr>
+<tr><td style="padding:0 10px 0 12px;height:28px;border-bottom:1px solid #1A2A3F;color:#F2F6FA;font-weight:600">TSLA</td><td style="padding:0 10px;border-bottom:1px solid #1A2A3F;color:#A9B7C9;font-family:'Source Sans 3',sans-serif">Equity</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#F2F6FA">248.20</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">n/a</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td></tr>
+<tr><td style="padding:0 10px 0 12px;height:28px;border-bottom:1px solid #1A2A3F;color:#F2F6FA;font-weight:600">SPX</td><td style="padding:0 10px;border-bottom:1px solid #1A2A3F;color:#A9B7C9;font-family:'Source Sans 3',sans-serif">Index</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#F2F6FA">5,780.00</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">n/a</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td></tr>
+<tr><td style="padding:0 10px 0 12px;height:28px;border-bottom:1px solid #1A2A3F;color:#F2F6FA;font-weight:600">NDX</td><td style="padding:0 10px;border-bottom:1px solid #1A2A3F;color:#A9B7C9;font-family:'Source Sans 3',sans-serif">Index</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#F2F6FA">20,150.00</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">n/a</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td></tr>
+<tr><td style="padding:0 10px 0 12px;height:28px;border-bottom:1px solid #1A2A3F;color:#F2F6FA;font-weight:600">VIX</td><td style="padding:0 10px;border-bottom:1px solid #1A2A3F;color:#A9B7C9;font-family:'Source Sans 3',sans-serif">Volatility</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#F2F6FA">18.50</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">n/a</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td></tr>
+<tr><td style="padding:0 10px 0 12px;height:28px;border-bottom:1px solid #1A2A3F;color:#F2F6FA;font-weight:600">GOLD</td><td style="padding:0 10px;border-bottom:1px solid #1A2A3F;color:#A9B7C9;font-family:'Source Sans 3',sans-serif">Commodity</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#F2F6FA">2,340.00</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">n/a</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F">10</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F">2,150.00</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#F2F6FA">23,400.00</td><td style="text-align:right;padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;color:#46B98A">+1,900.00 ▲</td></tr>
+<tr><td style="padding:0 10px 0 12px;height:28px;border-bottom:1px solid #1A2A3F;color:#F2F6FA;font-weight:600">WTI</td><td style="padding:0 10px;border-bottom:1px solid #1A2A3F;color:#A9B7C9;font-family:'Source Sans 3',sans-serif">Commodity</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#F2F6FA">78.40</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">n/a</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td></tr>
+<tr><td style="padding:0 10px 0 12px;height:28px;border-bottom:1px solid #1A2A3F;color:#F2F6FA;font-weight:600">EURUSD</td><td style="padding:0 10px;border-bottom:1px solid #1A2A3F;color:#A9B7C9;font-family:'Source Sans 3',sans-serif">FX</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#F2F6FA">1.0920</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">n/a</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td><td style="text-align:right;padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">—</td></tr>
+<tr><td style="padding:0 10px 0 12px;height:28px;border-bottom:1px solid #1A2A3F;color:#F2F6FA;font-weight:600">BTC</td><td style="padding:0 10px;border-bottom:1px solid #1A2A3F;color:#A9B7C9;font-family:'Source Sans 3',sans-serif">Crypto</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#E0B04F">no quote</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">n/a</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F">0.8</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F">52,000.00</td><td style="text-align:right;padding:0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">n/a</td><td style="text-align:right;padding:0 12px 0 10px;border-bottom:1px solid #1A2A3F;color:#93A3B8">n/a</td></tr>
+</tbody>
+<tfoot style="font-family:'Source Code Pro',monospace;font-size:12px;font-variant-numeric:tabular-nums lining-nums">
+<tr>
+<th scope="row" colspan="6" style="text-align:left;padding:0 10px 0 12px;height:30px;font-family:'Source Sans 3',sans-serif;font-weight:600;color:#C9D5E3">Priced positions (4 of 5) · BTC excluded, no quote · cost 90,588.00</th>
+<td style="text-align:right;padding:0 10px;color:#FFFFFF;font-weight:600">105,878.00</td>
+<td style="text-align:right;padding:0 12px 0 10px;color:#46B98A;font-weight:600">+15,290.00 ▲ +16.88%</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</section>
+</div>
+
+<!-- Right column: story preview -->
+<section id="story-2" aria-labelledby="sp-h" style="flex:5 1 440px;min-width:0;background:#101B2A;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;gap:8px;padding:0 6px 0 12px;min-height:34px;background:#142235;border-bottom:1px solid #223349">
+<span style="font-size:12px;font-weight:700;letter-spacing:.08em;color:#F2F6FA">STORY</span>
+<span style="font-size:12px;color:#93A3B8;font-family:'Source Code Pro',monospace">2 / 6</span>
+<div style="flex:1"></div>
+<button type="button" aria-label="Previous story" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid #2C3F59;color:#C9D5E3;cursor:pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<button type="button" aria-label="Next story" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid #2C3F59;color:#C9D5E3;cursor:pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+<button type="button" aria-label="Open story in new pane" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid #2C3F59;color:#C9D5E3;cursor:pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6"></path><path d="M20 4l-9 9"></path><path d="M18 14v6H4V6h6"></path></svg></button>
+</div>
+
+<div style="padding:12px 14px 4px;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:12px;color:#A9B7C9">
+<span style="padding:1px 6px;border:1px solid #3B5170;color:#DCE4EE;font-size:11px;letter-spacing:.06em">MACRO</span>
+<span>Demo Macro Desk</span>
+<span>Reliability <span style="font-family:'Source Code Pro',monospace;color:#F2F6FA">95</span></span>
+<span style="color:#93A3B8">Demo data · item 2 of dataset</span>
+</div>
+<h2 id="sp-h" style="margin:0;font-size:18px;line-height:1.3;font-weight:600;color:#FFFFFF">Fed officials signal patience on rate cuts as inflation cools unevenly</h2>
+<p style="margin:0;font-size:12px;color:#93A3B8">Headline-only item. Story body is not included in the demo dataset.</p>
+</div>
+
+<!-- AI assessment block -->
+<div role="region" aria-labelledby="ai-h" style="margin:8px 14px 0;border:1px solid #2C3F59;background:#0E1A29">
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:0 10px;min-height:30px;border-bottom:1px solid #2C3F59;background:#132438">
+<h3 id="ai-h" style="margin:0;font-size:11px;font-weight:700;letter-spacing:.08em;color:#F2F6FA">AI ASSESSMENT</h3>
+<span style="font-size:11px;color:#93A3B8">AI simulation · not investment advice</span>
+<div style="flex:1"></div>
+<span style="font-size:11px;color:#E0B04F">◌ Awaiting quorum</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:#2C3F59">
+<div style="background:#0E1A29;padding:8px 10px;display:flex;flex-direction:column;gap:4px">
+<span style="font-size:11px;color:#93A3B8;letter-spacing:.04em">ALPHASCORE</span>
+<span style="font-family:'Source Code Pro',monospace;font-variant-numeric:tabular-nums lining-nums;font-size:20px;font-weight:600;color:#FFFFFF">76<span style="font-size:12px;color:#93A3B8;font-weight:400"> / 100</span></span>
+<div aria-hidden="true" style="position:relative;height:6px;background:#1A2A3F"><div style="position:absolute;left:0;top:0;bottom:0;width:76%;background:#5AA9E6"></div><div style="position:absolute;left:85%;top:-2px;bottom:-2px;width:1px;background:#DCE4EE"></div></div>
+<span style="font-size:11px;color:#A9B7C9">−9.0 vs scored avg 85.0 · rank 3 of 3</span>
+</div>
+<div style="background:#0E1A29;padding:8px 10px;display:flex;flex-direction:column;gap:4px">
+<span style="font-size:11px;color:#93A3B8;letter-spacing:.04em">SENTIMENT</span>
+<span style="font-size:16px;font-weight:700;color:#F58C86">▼ NEGATIVE</span>
+<span style="font-size:11px;color:#A9B7C9">1 of 3 scored items negative</span>
+</div>
+<div style="background:#0E1A29;padding:8px 10px;display:flex;flex-direction:column;gap:4px">
+<span style="font-size:11px;color:#93A3B8;letter-spacing:.04em">SOURCE RELIABILITY</span>
+<span style="font-family:'Source Code Pro',monospace;font-variant-numeric:tabular-nums lining-nums;font-size:20px;font-weight:600;color:#FFFFFF">95<span style="font-size:12px;color:#93A3B8;font-weight:400"> / 100</span></span>
+<span style="font-size:11px;color:#A9B7C9">Highest of 4 sources (others 80)</span>
+</div>
+<div style="background:#0E1A29;padding:8px 10px;display:flex;flex-direction:column;gap:4px">
+<span style="font-size:11px;color:#93A3B8;letter-spacing:.04em">QUORUM</span>
+<span style="font-size:16px;font-weight:700;color:#E0B04F">Not reached</span>
+<span style="font-size:11px;color:#A9B7C9">Agent votes not in dataset</span>
+</div>
+</div>
+<table style="width:100%;border-collapse:collapse;font-size:12px">
+<caption style="text-align:left;padding:8px 10px 4px;font-size:11px;font-weight:700;letter-spacing:.08em;color:#C9D5E3">PROVENANCE</caption>
+<tbody>
+<tr><th scope="row" style="text-align:left;font-weight:400;color:#93A3B8;padding:0 10px;height:26px;border-top:1px solid #1A2A3F;width:34%">Headline</th><td style="padding:0 10px;border-top:1px solid #1A2A3F;color:#DCE4EE">Demo Macro Desk · dataset field</td></tr>
+<tr><th scope="row" style="text-align:left;font-weight:400;color:#93A3B8;padding:0 10px;height:26px;border-top:1px solid #1A2A3F">Category</th><td style="padding:0 10px;border-top:1px solid #1A2A3F;color:#DCE4EE">MACRO · dataset field</td></tr>
+<tr><th scope="row" style="text-align:left;font-weight:400;color:#93A3B8;padding:0 10px;height:26px;border-top:1px solid #1A2A3F">Reliability 95</th><td style="padding:0 10px;border-top:1px solid #1A2A3F;color:#DCE4EE">Source register · dataset field</td></tr>
+<tr><th scope="row" style="text-align:left;font-weight:400;color:#93A3B8;padding:0 10px;height:26px;border-top:1px solid #1A2A3F">AlphaScore 76</th><td style="padding:0 10px;border-top:1px solid #1A2A3F;color:#DCE4EE">Quorum scoring · AI simulation</td></tr>
+<tr><th scope="row" style="text-align:left;font-weight:400;color:#93A3B8;padding:0 10px;height:26px;border-top:1px solid #1A2A3F">Sentiment</th><td style="padding:0 10px;border-top:1px solid #1A2A3F;color:#DCE4EE">Quorum scoring · AI simulation</td></tr>
+<tr><th scope="row" style="text-align:left;font-weight:400;color:#93A3B8;padding:0 10px;height:26px;border-top:1px solid #1A2A3F">Avg / rank</th><td style="padding:0 10px;border-top:1px solid #1A2A3F;color:#DCE4EE">Derived on screen from items 1–3</td></tr>
+<tr><th scope="row" style="text-align:left;font-weight:400;color:#93A3B8;padding:0 10px;height:26px;border-top:1px solid #1A2A3F">As of</th><td style="padding:0 10px;border-top:1px solid #1A2A3F;color:#DCE4EE;font-family:'Source Code Pro',monospace">18:40</td></tr>
+</tbody>
+</table>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:8px;padding:12px 14px">
+<button type="button" style="min-height:32px;padding:0 12px;background:transparent;border:1px solid #3B5170;color:#DCE4EE;font:inherit;font-size:12px;font-weight:600;cursor:pointer">Send to Strategy Boardroom</button>
+<button type="button" style="min-height:32px;padding:0 12px;background:transparent;border:1px solid #3B5170;color:#DCE4EE;font:inherit;font-size:12px;cursor:pointer">Flag for Compliance review</button>
+</div>
+
+<div style="margin:auto 14px 12px;padding:8px 10px;border:1px solid #223349;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:11px;color:#A9B7C9">
+<span style="color:#C9D5E3;font-weight:600;letter-spacing:.06em">COMPLIANCE</span>
+<span>Dataset active (v2)</span>
+<span>Team: Quorum Compliance</span>
+<span>Reviewer: Demo Fund Manager (Admin)</span>
+</div>
+</section>
+</main>
+
+<!-- Status bar -->
+<footer style="display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px;padding:6px 12px;background:#0E1A29;border-top:1px solid #223349;font-size:11px;color:#A9B7C9">
+<span style="display:flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#46B98A"></span>Backend online</span>
+<span style="display:flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#5AA9E6"></span>AI simulation</span>
+<span style="display:flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#46B98A"></span>Feed live</span>
+<span style="display:flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:7px;height:7px;border:1px solid #93A3B8;border-radius:50%;box-sizing:border-box"></span>Quant standby</span>
+<span style="display:flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#46B98A"></span>Compliance dataset active (v2)</span>
+<span style="flex:1"></span>
+<span>Demo data · AI simulation · as of 18:40</span>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
